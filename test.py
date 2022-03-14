@@ -39,12 +39,18 @@ except:
 
 
 
+
+
+
 class PyMeshInterface:
     """docstring forPyMeshInterface."""
 
     def __init__(self):
         global pymesh
         self.pymesh = pymesh
+        print("test")
+
+
 
 
     """send a message at all node of pymesh net, ts = 1, id = 0 """
