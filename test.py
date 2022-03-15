@@ -48,7 +48,6 @@ class PyMeshInterface:
     def __init__(self):
         global pymesh
         self.pymesh = pymesh
-        print("test")
 
 
 
