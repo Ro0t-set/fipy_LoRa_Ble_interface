@@ -26,33 +26,29 @@ def new_message_cb(rcv_ip, rcv_port, rcv_data):
         time.sleep(.1)
     return
 
-try: pymesh
-except:
-    try:
-        pymesh = pybytes.__pymesh.__pymesh
-    except:
-        pycom.heartbeat(False)
-        # read config file, or set default values
-        pymesh_config = PymeshConfig.read_config()
-        #initialize Pymesh
-        pymesh = Pymesh(pymesh_config, new_message_cb)
-
-
-
-
 
 
 class PyMeshInterface:
     """docstring forPyMeshInterface."""
 
-    def __init__(self):
-        global pymesh
-        self.pymesh = pymesh
+    def __init__(self, message_cb):
+        global pycom
+        self.pycom = pycom
+
+        try: self.pymesh
+        except:
+            try:
+                self.pymesh = pybytes.__pymesh.__pymesh
+            except:
+                self.pycom.heartbeat(False)
+                # read config file, or set default values
+                self.pymesh_config = PymeshConfig.read_config()
+                #initialize Pymesh
+                self.pymesh = Pymesh(self.pymesh_config, message_cb)
 
 
 
 
-    """send a message at all node of pymesh net, ts = 1, id = 0 """
     def send_brodcast_message(self, data):
         node = self.pymesh.mesh.get_mesh_mac_list()
         node_mac = node.values()
@@ -63,6 +59,6 @@ class PyMeshInterface:
                     self.pymesh.mesh.send_message({"to" : mac, "b" : data, "ts": 1, "id":0})
 
 
-mesh = PyMeshInterface()
+mesh = PyMeshInterface(new_message_cb)
 
 mesh.send_brodcast_message("testo")
