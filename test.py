@@ -3,10 +3,13 @@ import pycom
 from sensors import sensors
 import time
 from ble import bleConnection
+from machine import Timer
+
+
 def jsono_from_data(rcv_ip, rcv_port, rcv_data):
     data = str(rcv_data, 'utf-8')
     print("Lora: ", data, " from ", rcv_ip)
-    bleConnection.write(data)
+    ble.write(data)
     # user code to be inserted, to send packet to the designated Mesh-external interface
     for _ in range(3):
         pycom.rgbled(0x888888)
@@ -15,11 +18,15 @@ def jsono_from_data(rcv_ip, rcv_port, rcv_data):
         time.sleep(.1)
     return
 
-mesh = PyMeshInterface(jsono_from_data)
 
-while True:
+mesh = PyMeshInterface(jsono_from_data)
+ble = bleConnection.BleInterface("FiPyn1", lambda x: mesh.send_brodcast_message(str(x[1])))
+
+
+def lora_send_data(allarm):
+    global mesh
     mesh.send_brodcast_message(str(sensors.get_temperature()))
     mesh.send_brodcast_message(str(sensors.get_humidity()))
-    time.sleep(5)
 
-#update_alarm = Timer.Alarm(update_handler, 1, periodic=True)
+
+update_alarm = Timer.Alarm(lora_send_data, 5, periodic=True)
