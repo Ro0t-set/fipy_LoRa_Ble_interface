@@ -1,5 +1,4 @@
 from network import Bluetooth
-from machine import Timer
 
 
 def conn_cb(chr):

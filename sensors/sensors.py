@@ -10,15 +10,9 @@
 
 # See https://docs.pycom.io for more information regarding library specifics
 
-import time
-import pycom
 from pycoproc import Pycoproc
-import machine
-
-from LIS2HH12 import LIS2HH12
 from SI7006A20 import SI7006A20
-from LTR329ALS01 import LTR329ALS01
-from MPL3115A2 import MPL3115A2,ALTITUDE,PRESSURE
+from MPL3115A2 import MPL3115A2,PRESSURE
 
 def py_connection():
     py = Pycoproc()

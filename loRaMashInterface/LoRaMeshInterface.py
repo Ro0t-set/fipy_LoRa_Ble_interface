@@ -1,4 +1,3 @@
-import ubinascii
 import pycom
 
 
