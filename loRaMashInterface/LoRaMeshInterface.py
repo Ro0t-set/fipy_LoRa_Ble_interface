@@ -35,10 +35,11 @@ class PyMeshInterface:
                 self.pymesh = pymesh
                 global pymesh
 
-    def send_brodcast_message(self, data):
+    def send_broadcast_message(self, data):
         node = self.pymesh.mesh.get_mesh_mac_list()
         node_mac = node.values()
-        my_mac = self.pymesh.mac()
         for node in node_mac:
             for mac in node:
-                self.pymesh.mesh.send_message({"to": mac, "b": data, "ts": 1, "id": 0})
+                self.pymesh.mesh.send_message(
+                    {"to": mac, "b": data, "ts": 1, "id": 0}
+                )

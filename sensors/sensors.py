@@ -1,4 +1,3 @@
-
 #
 # Copyright (c) 2020, Pycom Limited.
 #
@@ -12,7 +11,8 @@
 
 from pycoproc import Pycoproc
 from SI7006A20 import SI7006A20
-from MPL3115A2 import MPL3115A2,PRESSURE
+from MPL3115A2 import MPL3115A2, PRESSURE
+
 
 def py_connection():
     py = Pycoproc()
@@ -22,29 +22,33 @@ def py_connection():
 
 
 def get_temperature():
-    py  = py_connection()
+    py = py_connection()
     si = SI7006A20(py)
-    return {'temp':str(si.temperature())}
+    return {'temp': str(si.temperature())}
+
 
 def get_humidity():
-    py  = py_connection()
+    py = py_connection()
     si = SI7006A20(py)
-    return {'hum':str(si.humidity())}
+    return {'hum': str(si.humidity())}
+
 
 def get_battery_voltage():
-    py  = py_connection()
-    return {'battery_voltage' : str(py.read_battery_voltage())}
+    py = py_connection()
+    return {'battery_voltage': str(py.read_battery_voltage())}
+
 
 def get_pressure():
-    py  = py_connection()
-    press = MPL3115A2(py,mode=PRESSURE)
-    return {'pressure':str(press.pressure())}
+    py = py_connection()
+    press = MPL3115A2(py, mode=PRESSURE)
+    return {'pressure': str(press.pressure())}
+
 
 def get_battery_percentage():
     py = py_connection()
     # set your battery voltage limits here
-    vmax = 4.2
-    vmin = 3.3
+    max_value = 4.2
+    min_value = 3.3
     battery_voltage = py.read_battery_voltage()
-    battery_percentage = (battery_voltage - vmin / (vmax - vmin))*100
-    return {'battery_percentage' : battery_percentage}
+    battery_percentage = (battery_voltage - min_value / (max_value - min_value)) * 100
+    return {'battery_percentage': battery_percentage}
