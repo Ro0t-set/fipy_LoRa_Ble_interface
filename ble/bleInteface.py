@@ -1,5 +1,4 @@
 from network import Bluetooth
-from machine import Timer
 
 connection = False
 
