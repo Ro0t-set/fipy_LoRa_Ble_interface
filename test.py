@@ -6,7 +6,7 @@ from ble import bleInteface
 from machine import Timer
 
 
-def jsono_from_data(rcv_ip, rcv_port, rcv_data):
+def json_from_data(rcv_ip, rcv_port, rcv_data):
     data = str(rcv_data, 'utf-8')
     print("Lora: ", data, " from ", rcv_ip)
     ble.write(data)
@@ -18,7 +18,7 @@ def jsono_from_data(rcv_ip, rcv_port, rcv_data):
         time.sleep(.1)
 
 
-mesh = PyMeshInterface(jsono_from_data)
+mesh = PyMeshInterface(json_from_data)
 ble = bleInteface.BleInterface("FiPyn1",
                                lambda x: mesh.send_broadcast_message(str(x[1])))
 
