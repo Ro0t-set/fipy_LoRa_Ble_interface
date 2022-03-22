@@ -1,7 +1,6 @@
 import ubinascii
 import pycom
 
-
 try:
     from pymesh_config import PymeshConfig
 except:
@@ -32,13 +31,10 @@ class PyMeshInterface:
                 self.pycom.heartbeat(False)
                 # read config file, or set default values
                 self.pymesh_config = PymeshConfig.read_config()
-                #initialize Pymesh
+                # initialize Pymesh
                 pymesh = Pymesh(self.pymesh_config, message_cb)
                 self.pymesh = pymesh
                 global pymesh
-
-
-
 
     def send_brodcast_message(self, data):
         node = self.pymesh.mesh.get_mesh_mac_list()
@@ -46,4 +42,4 @@ class PyMeshInterface:
         my_mac = self.pymesh.mac()
         for node in node_mac:
             for mac in node:
-                self.pymesh.mesh.send_message({"to" : mac, "b" : data, "ts": 1, "id":0})
+                self.pymesh.mesh.send_message({"to": mac, "b": data, "ts": 1, "id": 0})

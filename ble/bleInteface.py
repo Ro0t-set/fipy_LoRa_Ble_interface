@@ -1,13 +1,18 @@
 from network import Bluetooth
 from machine import Timer
 
+connection = False
+
 
 def conn_cb(chr):
+    global connection
     events = chr.events()
     if events & Bluetooth.CLIENT_CONNECTED:
+        connection = True
         print('BLE client connected')
     elif events & Bluetooth.CLIENT_DISCONNECTED:
         print('BLE client disconnected')
+        connection = False
 
 
 class BleInterface:
@@ -33,8 +38,7 @@ class BleInterface:
             self.on_message_callback(data)
 
     def write(self, txt_value):
-        try:
+        global connection
+        if connection:
             self.value = txt_value
             self.chr.value(self.value)
-        except:
-            pass

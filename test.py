@@ -2,7 +2,7 @@ from loRaMashInterface.LoRaMeshInterface import PyMeshInterface
 import pycom
 from sensors import sensors
 import time
-from ble import bleConnection
+from ble import bleInteface
 from machine import Timer
 
 
@@ -20,7 +20,7 @@ def jsono_from_data(rcv_ip, rcv_port, rcv_data):
 
 
 mesh = PyMeshInterface(jsono_from_data)
-ble = bleConnection.BleInterface("FiPyn1", lambda x: mesh.send_brodcast_message(str(x[1])))
+ble = bleInteface.BleInterface("FiPyn1", lambda x: mesh.send_brodcast_message(str(x[1])))
 
 
 def lora_send_data(allarm):
