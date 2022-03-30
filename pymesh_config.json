@@ -1,1 +1,0 @@
-{"Pymesh": {"key": "112233"}, "debug": 5, "ble_api": false, "ble_name_prefix": "PyGo ", "br_prio": 0, "MAC": 8121069065199902020, "LoRa": {"sf": 7, "region": 5, "freq": 869000000, "bandwidth": 2}, "br_ena": false, "autostart": true}
