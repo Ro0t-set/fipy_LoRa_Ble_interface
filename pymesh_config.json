@@ -1,1 +1,1 @@
-{"Pymesh": {"key": "25cb7c3f-10a6e20b-c5da201b-5c2a6bbf"}, "debug": 5, "ble_api": false, "ble_name_prefix": "Device-F008D1CCDD9C", "br_prio": 0, "MAC": 8121069065107457362, "LoRa": {"sf": 7, "freq": 868000000, "region": 5, "bandwidth": 0}, "br_ena": true, "autostart": false}
+{"Pymesh": {"key": "112233"}, "debug": 5, "ble_api": false, "ble_name_prefix": "PyGo ", "br_prio": 0, "MAC": 8121069065199902020, "LoRa": {"sf": 7, "region": 5, "freq": 869000000, "bandwidth": 2}, "br_ena": false, "autostart": true}

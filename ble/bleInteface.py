@@ -20,12 +20,12 @@ class BleInterface:
         self.value = ""
         self.on_message_callback = on_message_callback
         self.bluetooth = Bluetooth()
-        self.bluetooth.set_advertisement(name=name, manufacturer_data="Pycom", service_uuid=0xec00)
+        self.bluetooth.set_advertisement(name=name, manufacturer_data="Pycom", service_uuid=b'1234567890123456')
         self.bluetooth.callback(trigger=Bluetooth.CLIENT_CONNECTED | Bluetooth.CLIENT_DISCONNECTED,
                                 handler=conn_cb)
         self.bluetooth.advertise(True)
-        self.srv = self.bluetooth.service(uuid=0xec00, isprimary=True, nbr_chars=1)
-        self.chr = self.srv.characteristic(uuid=0xec0e, value='read_from_here')  # client reads from here
+        self.srv = self.bluetooth.service(uuid=b'1234567890123456', isprimary=True, nbr_chars=1)
+        self.chr = self.srv.characteristic(uuid=b'1234567890123456', value='read_from_here')  # client reads from here
         self.chr.callback(trigger=(Bluetooth.CHAR_WRITE_EVENT |
                                    Bluetooth.CHAR_READ_EVENT |
                                    Bluetooth.CHAR_SUBSCRIBE_EVENT),
@@ -38,6 +38,8 @@ class BleInterface:
 
     def write(self, txt_value):
         global connection
-        if connection:
+        try:
             self.value = txt_value
             self.chr.value(self.value)
+        except:
+            pass
