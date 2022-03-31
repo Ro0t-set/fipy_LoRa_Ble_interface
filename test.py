@@ -30,4 +30,4 @@ def lora_send_data(allarm):
     mesh.send_broadcast_message(str({"node_info": str(mesh.pymesh.mesh.get_mesh_pairs())}))
 
 
-update_alarm = Timer.Alarm(lora_send_data, 10, periodic=True)
+update_alarm = Timer.Alarm(lora_send_data, 10.0, periodic=True)
