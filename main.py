@@ -22,8 +22,9 @@ def json_from_data(rcv_ip, rcv_port, rcv_data):
         pycom.rgbled(0)
         time.sleep(.1)
 
-    global wdt
-    wdt.feed()
+    if mesh.pymesh.is_connected():
+        global wdt
+        wdt.feed()
 
 
 """initialize mesh net"""
