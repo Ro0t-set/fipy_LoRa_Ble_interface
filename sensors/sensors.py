@@ -24,24 +24,24 @@ def py_connection():
 def get_temperature():
     py = py_connection()
     si = SI7006A20(py)
-    return {'temp': str(si.temperature())}
+    return {'temp': si.temperature()}
 
 
 def get_humidity():
     py = py_connection()
     si = SI7006A20(py)
-    return {'hum': str(si.humidity())}
+    return {'hum': si.humidity()}
 
 
 def get_battery_voltage():
     py = py_connection()
-    return {'battery_voltage': str(py.read_battery_voltage())}
+    return {'battery_voltage': py.read_battery_voltage()}
 
 
 def get_pressure():
     py = py_connection()
     press = MPL3115A2(py, mode=PRESSURE)
-    return {'pressure': str(press.pressure())}
+    return {'pressure': press.pressure()}
 
 
 def get_battery_percentage():

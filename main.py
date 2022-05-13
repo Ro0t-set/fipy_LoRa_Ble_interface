@@ -31,7 +31,7 @@ def json_from_data(rcv_ip, rcv_port, rcv_data):
 mesh = PyMeshInterface(json_from_data)
 """initialize ble service"""
 ble = bleInteface.BleInterface("FiPy",
-                               lambda x: mesh.send_broadcast_message(str(x[1])))
+                               lambda x: mesh.send_broadcast_message(str(x[1])[2:len(x[1])+2]))
 
 
 def lora_send_data(allarm):
@@ -39,6 +39,7 @@ def lora_send_data(allarm):
     mesh.send_broadcast_message(str({"node_info": str(mesh.pymesh.mesh.get_mesh_pairs())}))
     mesh.send_broadcast_message(str(sensors.get_temperature()))
     mesh.send_broadcast_message(str(sensors.get_battery_percentage()))
+
 
 
 update_alarm = Timer.Alarm(lora_send_data, 20.0, periodic=True)
