@@ -33,6 +33,7 @@ class PyMeshInterface:
                 # initialize Pymesh
                 pymesh = Pymesh(self.pymesh_config, message_cb)
                 self.pymesh = pymesh
+                self.pymesh.resume(20)
                 global pymesh
 
     def send_broadcast_message(self, data):
