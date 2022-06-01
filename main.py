@@ -13,8 +13,8 @@ wdt = WDT(timeout=120000)  # enable it with a timeout of 120 seconds
 
 def json_from_data(rcv_ip, rcv_port, rcv_data):
     data = str(rcv_data, 'utf-8')
-    print("Lora: ", data, " from ", ubinascii.hexlify(machine.unique_id())   )
-    ble.write(ubinascii.hexlify(machine.unique_id())  + "=" + data)
+    print("Lora: ", data, " from ", rcv_ip)
+    ble.write(rcv_ip + "=" + data)
     # user code to be inserted, to send packet to the designated Mesh-external interface
     for _ in range(3):
         pycom.rgbled(0x888888)
